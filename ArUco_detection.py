@@ -5,14 +5,21 @@ import time
 from ArUco_library import *
 
 
-image_list = ["path_to_directory/Image.png","path_to_directory/Image.png"]
-count = 0
+init = time.time()
+cap = cv2.VideoCapture('input_video.avi')
 
-for image in image_list:
-	img = cv2.imread(image)
-	Detected_ArUco_markers = detect_ArUco(img)
+while(cap.isOpened()):
+	ret,img=cap.read()
+	Detected_ArUco_markers = detect_ArUco(img
 	angle = Calculate_orientation_in_degree(Detected_ArUco_markers)
 	img = mark_ArUco(img,Detected_ArUco_markers,angle)
-	count += 1
-	cv2.imwrite("ArUco"+str(count)+".png",img)
+
+	cv2.imshow('vid_frame',img)			
+	k = cv2.waitKey(30) & 0xff
+	if k == 27:
+		exit(0)
+
+cap.release()
+cv2.destroyAllWindows()
+print(time.time()-init)
 
