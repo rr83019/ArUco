@@ -13,5 +13,6 @@ for image in image_list:
 	Detected_ArUco_markers = detect_ArUco(img)
 	angle = Calculate_orientation_in_degree(Detected_ArUco_markers)
 	img = mark_ArUco(img,Detected_ArUco_markers,angle)
-	cv2.imwrite("ArUco"+str(count++)+".png",img)
+	count += 1
+	cv2.imwrite("ArUco"+str(count)+".png",img)
 
